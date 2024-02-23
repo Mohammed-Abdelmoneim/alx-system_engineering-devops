@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# displays numbers from 1 to 20
+hour=0
+while [ $hour -lt 13 ]
+do
+    mins=1
+    echo "hour: $hour"
+    while [ $mins -lt 60 ]
+    do
+      echo $mins
+      mins=$(( mins+1 ))
+    done
+    hour=$(( hour+1 ))
+done
