@@ -1,27 +1,18 @@
 #!/usr/bin/python3
-"""
-number of subscribers for a given subreddit
-"""
-
-from requests import get
+"""First script that uses Reddit API"""
+import requests
 
 
 def number_of_subscribers(subreddit):
-    """
-    function that queries the Reddit API and returns the number of subscribers
-    (not active users, total subscribers) for a given subreddit.
-    """
-
-    if subreddit is None or not isinstance(subreddit, str):
+    """A function to do stuff that can be done using other functions"""
+    if subreddit is None or type(subreddit) is not str:
         return 0
-
-    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
-    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    response = get(url, headers=user_agent)
-    results = response.json()
-
-    try:
-        return results.get('data').get('subscribers')
-
-    except Exception:
+    user_agent = "0x16-api_advanced/1.0 by mohmamed-abdelmoneim"
+    headers = {"User-Agent": user_agent}
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    my_object = requests.get(url, headers=headers, allow_redirects=False)
+    my_dict = my_object.json()
+    if my_object.status_code == 200:
+        return my_dict['data']['subscribers']
+    else:
         return 0
